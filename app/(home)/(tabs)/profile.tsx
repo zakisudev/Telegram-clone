@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, ScrollView } from 'react-native';
 import { Button, Input } from '@rneui/themed';
 import { Session } from '@supabase/supabase-js';
 import { useAuth } from '../../../providers/AuthProvider';
+import Avatar from '../../../components/Avatar';
 
 export default function Account() {
   const { session } = useAuth();
@@ -85,7 +86,34 @@ export default function Account() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={{
+        marginTop: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 12,
+      }}
+    >
+      <View
+        style={{
+          alignItems: 'center',
+          borderRadius: 50,
+        }}
+      >
+        <Avatar
+          size={200}
+          url={avatarUrl}
+          onUpload={(url: string) => {
+            setAvatarUrl(url);
+            updateProfile({
+              username,
+              website,
+              avatar_url: url,
+              full_name: fullName,
+            });
+          }}
+        />
+      </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input label="Email" value={session?.user?.email} disabled />
       </View>
@@ -124,13 +152,15 @@ export default function Account() {
       <View style={styles.verticallySpaced}>
         <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 12,
   },
   verticallySpaced: {
