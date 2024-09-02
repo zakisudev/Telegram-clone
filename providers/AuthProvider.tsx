@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
 
     const fetchProfile = async () => {
       let { data, error } = await supabase
-        .from('profiles')
+        ?.from('profiles')
         .select('*')
         .eq('id', session.user.id)
         .single()
