@@ -1,15 +1,18 @@
 import { View, Text } from 'react-native';
-import { Stack, Slot } from 'expo-router';
+import { Stack, Slot, Redirect } from 'expo-router';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AuthProvider from '../providers/AuthProvider';
+import { useAuth } from '../providers/AuthProvider';
 
-
-const _layout = () => {
+const HomeLayout = () => {
   return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AuthProvider>
         <Slot />
-      </GestureHandlerRootView>
+      </AuthProvider>
+    </GestureHandlerRootView>
   );
 };
 
-export default _layout;
+export default HomeLayout;
