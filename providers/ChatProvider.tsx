@@ -17,6 +17,8 @@ const ChatProvider = ({ children }) => {
     if (!profile) return;
 
     const connect = async () => {
+      console.log(profile.id);
+      console.log(await tokenProvider());
       await client.connectUser(
         {
           id: profile.id,
