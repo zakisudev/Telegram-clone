@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import React, {useState} from 'react';
 import {ChannelList, Channel, MessageList, MessageInput} from 'stream-chat-expo';
-import { router, Stack, Link } from 'expo-router';
+import { router, Stack, Link, Redirect } from 'expo-router';
 import { useAuth } from '../../../providers/AuthProvider';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
@@ -10,6 +10,7 @@ const MainTabScreen = () => {
 
   return (
     <>
+      <Redirect href={'/(home)/call'} />
       <Stack.Screen
         options={{
           headerRight: () => (

@@ -34,9 +34,7 @@ const ChatProvider = ({ children }) => {
     connect();
 
     return () => {
-      if (isReady) {
-        client.disconnectUser();
-      }
+      client.disconnectUser();
       setIsReady(false);
     };
   }, [profile?.id]);
