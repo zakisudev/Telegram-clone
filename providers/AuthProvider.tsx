@@ -36,18 +36,10 @@ const AuthProvider = ({ children }) => {
 
     const fetchProfile = async () => {
       let { data, error } = await supabase
-        ?.from('profiles')
+        .from('profiles')
         .select('*')
-        .eq('id', session.user.id)
-        .single()
-        .then(({ data }) => {
-          setProfile(data);
-        });
-
-      if (error) {
-        console.error('Error fetching profile:', error.message);
-      }
-
+        .eq('id', session?.user?.id)
+        .single();
       setProfile(data);
     };
 
